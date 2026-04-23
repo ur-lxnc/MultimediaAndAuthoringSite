@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>3D Rendering — Multimedia and Authoring</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --navy-deepest: #020b18;
+      --navy-deep:    #040f1e;
+      --navy-mid:     #071628;
+      --navy-card:    #0a1e38;
+      --navy-border:  #102845;
+      --navy-light:   #163460;
+      --accent:       #2e8fe8;
+      --accent-glow:  #3fa0ff;
+      --accent-soft:  rgba(46,143,232,0.12);
+      --accent-line:  rgba(46,143,232,0.4);
+      --gold:         #c8a96e;
+      --gold-soft:    rgba(200,169,110,0.12);
+      --text-primary: #e8edf5;
+      --text-secondary:#8fa8c8;
+      --text-muted:   #4a6585;
+      --white:        #ffffff;
+      --font-display: 'Cormorant Garamond', serif;
+      --font-body:    'DM Sans', sans-serif;
+      --font-mono:    'DM Mono', monospace;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--navy-deepest); color: var(--text-primary); font-family: var(--font-body); }
+
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 3rem; height: 64px;
+      background: rgba(2,11,24,0.92); backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--navy-border);
+    }
+    .nav-logo { font-family: var(--font-mono); font-size: 0.72rem; color: var(--accent); letter-spacing: 0.2em; text-transform: uppercase; text-decoration: none; }
+    .nav-links { display: flex; gap: 0.25rem; }
+    .nav-links a {
+      text-decoration: none; color: var(--text-secondary);
+      font-size: 0.82rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase;
+      padding: 0.5rem 1rem; border-radius: 4px; transition: color 0.2s, background 0.2s;
+    }
+    .nav-links a:hover { color: var(--white); background: var(--accent-soft); }
+
+    /* PAGE HEADER */
+    .page-header {
+      padding: 9rem 2rem 5rem;
+      background: linear-gradient(180deg, var(--navy-deep) 0%, var(--navy-mid) 100%);
+      position: relative; overflow: hidden;
+    }
+    .page-header::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 60% 60% at 80% 40%, rgba(46,143,232,0.07) 0%, transparent 65%);
+    }
+    .header-inner { max-width: 1100px; margin: 0 auto; position: relative; z-index: 1; }
+    .breadcrumb { font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.15em; color: var(--text-muted); margin-bottom: 1.25rem; }
+    .breadcrumb a { color: var(--accent); text-decoration: none; }
+    .breadcrumb span { margin: 0 0.4rem; }
+    .page-tag { display: inline-flex; align-items: center; gap: 0.5rem; font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); margin-bottom: 1rem; }
+    .page-title { font-family: var(--font-display); font-size: clamp(2.5rem, 6vw, 5rem); font-weight: 700; color: var(--white); line-height: 1.0; margin-bottom: 0.75rem; }
+    .page-title span { color: var(--accent); }
+    .page-desc { color: var(--text-secondary); font-size: 1rem; line-height: 1.8; max-width: 700px; margin-top: 0.75rem; }
+
+    /* MAIN */
+    main { max-width: 1100px; margin: 0 auto; padding: 5rem 2rem 6rem; }
+    .content-block { margin-bottom: 6rem; }
+
+    .section-label { font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.6rem; }
+    .section-label::before { content: '// '; opacity: 0.5; }
+    .section-title { font-family: var(--font-display); font-size: clamp(1.8rem, 3.5vw, 2.5rem); font-weight: 700; color: var(--white); margin-bottom: 0.75rem; }
+    .divider { width: 40px; height: 2px; background: linear-gradient(to right, var(--accent), transparent); margin-bottom: 1.25rem; }
+    .section-desc { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.8; max-width: 700px; margin-bottom: 2rem; }
+
+    /* VIDEO */
+    .video-wrap { position: relative; width: 100%; aspect-ratio: 16/9; background: var(--navy-card); border: 1px solid var(--navy-border); border-radius: 8px; overflow: hidden; }
+    .video-wrap iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+    .video-placeholder { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem; }
+    .video-placeholder .icon { width: 64px; height: 64px; border-radius: 50%; background: var(--accent-soft); border: 2px solid var(--accent-line); display: flex; align-items: center; justify-content: center; }
+    .video-placeholder .icon svg { width: 24px; height: 24px; fill: var(--accent); margin-left: 4px; }
+    .video-placeholder p { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.1em; color: var(--text-muted); text-align: center; }
+
+    /* TOOLS */
+    .tools-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 2px; }
+    .tool-card { background: var(--navy-card); border: 1px solid var(--navy-border); padding: 1.75rem 2rem; }
+    .tool-icon { font-size: 2rem; margin-bottom: 0.75rem; }
+    .tool-name { font-family: var(--font-display); font-size: 1.2rem; font-weight: 700; color: var(--white); margin-bottom: 0.5rem; }
+    .tool-desc { color: var(--text-secondary); font-size: 0.88rem; line-height: 1.7; }
+
+    /* AGE CALCULATOR */
+    .calculator-wrap {
+      background: var(--navy-card);
+      border: 1px solid var(--navy-border);
+      border-radius: 8px; overflow: hidden;
+    }
+
+    .calc-header {
+      padding: 2rem 2.5rem;
+      background: var(--navy-mid);
+      border-bottom: 1px solid var(--navy-border);
+      display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap;
+    }
+    .calc-header-text h3 { font-family: var(--font-display); font-size: 1.6rem; font-weight: 700; color: var(--white); margin-bottom: 0.25rem; }
+    .calc-header-text p { color: var(--text-secondary); font-size: 0.88rem; }
+
+    .calc-input-row {
+      padding: 1.75rem 2.5rem;
+      display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;
+      border-bottom: 1px solid var(--navy-border);
+    }
+    .calc-input-label { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-secondary); white-space: nowrap; }
+    .calc-input {
+      background: var(--navy-mid); border: 1px solid var(--navy-border);
+      color: var(--white); font-family: var(--font-body); font-size: 1.1rem; font-weight: 500;
+      padding: 0.65rem 1.25rem; border-radius: 5px; width: 140px;
+      outline: none; transition: border-color 0.2s;
+      -moz-appearance: textfield;
+    }
+    .calc-input::-webkit-inner-spin-button, .calc-input::-webkit-outer-spin-button { -webkit-appearance: none; }
+    .calc-input:focus { border-color: var(--accent); }
+    .calc-btn {
+      background: var(--accent); color: var(--white);
+      font-family: var(--font-body); font-size: 0.82rem; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 0.7rem 1.75rem; border-radius: 5px; border: none; cursor: pointer;
+      transition: background 0.2s, box-shadow 0.2s;
+    }
+    .calc-btn:hover { background: var(--accent-glow); box-shadow: 0 0 20px rgba(46,143,232,0.35); }
+
+    .planets-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 2px; padding: 2px;
+    }
+
+    .planet-card {
+      background: var(--navy-card);
+      border: 1px solid var(--navy-border);
+      padding: 1.5rem 1.5rem 1.75rem;
+      text-align: center;
+      transition: border-color 0.25s;
+    }
+    .planet-card:hover { border-color: var(--accent-line); }
+
+    .planet-icon { font-size: 3rem; margin-bottom: 0.75rem; display: block; line-height: 1; }
+    .planet-name { font-family: var(--font-display); font-size: 1.25rem; font-weight: 700; color: var(--white); margin-bottom: 0.25rem; }
+    .planet-meta { font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 1rem; }
+
+    .planet-result { display: none; }
+    .planet-result.show { display: block; }
+
+    .result-age {
+      font-family: var(--font-display); font-size: 2.2rem; font-weight: 700;
+      color: var(--accent); line-height: 1; margin-bottom: 0.25rem;
+    }
+    .result-age-label { font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 1rem; }
+
+    .result-stats { border-top: 1px solid var(--navy-border); padding-top: 0.85rem; text-align: left; }
+    .stat-row { display: flex; justify-content: space-between; align-items: center; padding: 0.3rem 0; }
+    .stat-label { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-muted); }
+    .stat-value { font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-secondary); }
+
+    .planet-default { color: var(--text-muted); font-family: var(--font-mono); font-size: 0.72rem; padding: 0.75rem 0; }
+
+    /* WEEKLY CLIPS */
+    .weekly-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 2px; }
+    .module-card { background: var(--navy-card); border: 1px solid var(--navy-border); overflow: hidden; }
+    .module-video { position: relative; aspect-ratio: 16/9; background: var(--navy-mid); }
+    .module-video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; pointer-events: none; }
+    .module-video .no-click { position: absolute; inset: 0; z-index: 2; }
+    .module-info { padding: 1rem 1.25rem; }
+    .module-label { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.35rem; }
+    .module-title { font-family: var(--font-display); font-size: 1.05rem; font-weight: 700; color: var(--white); }
+
+    /* FOOTER */
+    footer { background: var(--navy-deep); border-top: 1px solid var(--navy-border); padding: 2.5rem 3rem; text-align: center; }
+    .footer-line { width: 60px; height: 1px; background: var(--accent-line); margin: 0 auto 1.25rem; }
+    .footer-text { color: var(--text-muted); font-size: 0.8rem; line-height: 2; }
+    .footer-text span { color: var(--text-secondary); }
+
+    @media (max-width: 700px) { nav { padding: 0 1.25rem; } .calc-input-row { flex-direction: column; align-items: flex-start; } }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="nav-logo">MMA · Portfolio</a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+    </div>
+  </nav>
+
+  <div class="page-header">
+    <div class="header-inner">
+      <div class="breadcrumb"><a href="index.html">Home</a><span>/</span>Projects<span>/</span>3D Rendering</div>
+      <div class="page-tag">02 &nbsp;·&nbsp; 3D Graphics · Solar System</div>
+      <h1 class="page-title">3D Rendering —<br/><span>Solar System</span></h1>
+      <p class="page-desc">
+        3D rendering is the process of generating a two-dimensional image from a three-dimensional model using specialized software. It simulates light, texture, shadow, and spatial depth to produce photorealistic or stylized visuals. This project renders our solar system — capturing the scale, color, and motion of each planet in a fully three-dimensional environment using real astronomical data.
+      </p>
+    </div>
+  </div>
+
+  <main>
+
+    <!-- FULL OUTPUT VIDEO -->
+    <div class="content-block">
+      <div class="section-label">Final Output</div>
+      <h2 class="section-title">Complete 3D Render — Solar System</h2>
+      <div class="divider"></div>
+      <p class="section-desc">The finished 3D-rendered solar system animation. Watch the full output below.</p>
+      <div class="video-wrap">
+        <!-- REPLACE with your YouTube embed -->
+        <div class="video-placeholder">
+          <div class="icon"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+          <p>Replace this with your YouTube embed URL<br/>(iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID")</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- TOOLS USED -->
+    <div class="content-block">
+      <div class="section-label">Tools &amp; Software</div>
+      <h2 class="section-title">Tools Used</h2>
+      <div class="divider"></div>
+      <p class="section-desc">The following applications and resources were used to design, model, render, and compile the 3D solar system animation.</p>
+      <div class="tools-grid">
+        <div class="tool-card">
+          <div class="tool-icon">🎬</div>
+          <div class="tool-name">3D Modeling Software</div>
+          <div class="tool-desc">Used to create and position planetary spheres, apply texture maps, and set orbital paths in three-dimensional space.</div>
+        </div>
+        <div class="tool-card">
+          <div class="tool-icon">💡</div>
+          <div class="tool-name">Lighting &amp; Rendering Engine</div>
+          <div class="tool-desc">Simulates realistic sunlight, ambient glow, and shadow casting across planet surfaces using ray tracing or rasterization techniques.</div>
+        </div>
+        <div class="tool-card">
+          <div class="tool-icon">🎨</div>
+          <div class="tool-name">Texture Mapping</div>
+          <div class="tool-desc">High-resolution planetary texture maps applied to sphere geometries to accurately represent each planet's appearance.</div>
+        </div>
+        <div class="tool-card">
+          <div class="tool-icon">✂️</div>
+          <div class="tool-name">Adobe Premiere / After Effects</div>
+          <div class="tool-desc">Post-processing and video compilation of the rendered frames into the final animation output with sound and transitions.</div>
+        </div>
+        <div class="tool-card">
+          <div class="tool-icon">🪐</div>
+          <div class="tool-name">Astronomical Data Reference</div>
+          <div class="tool-desc">NASA and JPL data sources used for accurate orbital periods, distances from the Sun, and relative planet sizes.</div>
+        </div>
+        <div class="tool-card">
+          <div class="tool-icon">🖥️</div>
+          <div class="tool-name">Render Queue / Export</div>
+          <div class="tool-desc">Batch rendering and frame-by-frame export pipeline to produce the final video at high resolution and frame rate.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PLANETARY AGE CALCULATOR -->
+    <div class="content-block">
+      <div class="section-label">Interactive Tool</div>
+      <h2 class="section-title">Planetary Age Calculator</h2>
+      <div class="divider"></div>
+      <p class="section-desc">Enter your age in Earth years to discover how old you would be on each planet and the Sun. Results include your age in planetary years, number of orbits completed, orbital period, and distance from the Sun.</p>
+
+      <div class="calculator-wrap">
+        <div class="calc-header">
+          <div style="font-size:2.5rem;">🌍</div>
+          <div class="calc-header-text">
+            <h3>How Old Are You on Other Planets?</h3>
+            <p>Based on each planet's orbital period relative to Earth's 365.25-day year.</p>
+          </div>
+        </div>
+        <div class="calc-input-row">
+          <div class="calc-input-label">Your Age (Earth Years)</div>
+          <input type="number" class="calc-input" id="earthAge" placeholder="25" min="1" max="200" value=""/>
+          <button class="calc-btn" onclick="calculateAges()">Calculate</button>
+        </div>
+        <div class="planets-grid" id="planetsGrid">
+          <!-- Rendered by JS -->
+        </div>
+      </div>
+    </div>
+
+    <!-- WEEKLY PROGRESS -->
+    <div class="content-block">
+      <div class="section-label">Progress Log</div>
+      <h2 class="section-title">Weekly Progress — 5-Second Clips</h2>
+      <div class="divider"></div>
+      <p class="section-desc">Short 5-second progress clips captured each week throughout the 3D rendering project. Each clip shows the state of the work at that stage.</p>
+      <div class="weekly-grid" id="weeklyGrid"></div>
+    </div>
+
+  </main>
+
+  <footer>
+    <div class="footer-line"></div>
+    <div class="footer-text">
+      <span>© 2026 Lance Christian Bernales</span><br/>
+      BSIT-NS-2A &nbsp;·&nbsp; All rights reserved.<br/>
+      For educational purposes only.
+    </div>
+  </footer>
+
+  <script>
+    // ── PLANET DATA ──────────────────────────────────────────────────────
+    const planets = [
+      {
+        name: "Sun",
+        icon: "☀️",
+        color: "#f5a623",
+        orbitalPeriod: 25.38,          // rotation period (days) — Sun doesn't orbit
+        distanceAU: 0,
+        distanceKm: "0 (center)",
+        isStar: true,
+        note: "Rotation period",
+      },
+      {
+        name: "Mercury",
+        icon: "⚫",
+        color: "#9e9e9e",
+        orbitalPeriod: 87.97,
+        distanceAU: 0.387,
+        distanceKm: "57.9 million km",
+      },
+      {
+        name: "Venus",
+        icon: "🟠",
+        color: "#e8a44a",
+        orbitalPeriod: 224.70,
+        distanceAU: 0.723,
+        distanceKm: "108.2 million km",
+      },
+      {
+        name: "Earth",
+        icon: "🌍",
+        color: "#2e8fe8",
+        orbitalPeriod: 365.25,
+        distanceAU: 1.000,
+        distanceKm: "149.6 million km",
+      },
+      {
+        name: "Mars",
+        icon: "🔴",
+        color: "#c0392b",
+        orbitalPeriod: 686.97,
+        distanceAU: 1.524,
+        distanceKm: "227.9 million km",
+      },
+      {
+        name: "Jupiter",
+        icon: "🟤",
+        color: "#c8a96e",
+        orbitalPeriod: 4332.59,
+        distanceAU: 5.203,
+        distanceKm: "778.5 million km",
+      },
+      {
+        name: "Saturn",
+        icon: "🪐",
+        color: "#d4aa70",
+        orbitalPeriod: 10759.22,
+        distanceAU: 9.537,
+        distanceKm: "1.43 billion km",
+      },
+      {
+        name: "Uranus",
+        icon: "🔵",
+        color: "#7ecfcf",
+        orbitalPeriod: 30688.50,
+        distanceAU: 19.191,
+        distanceKm: "2.87 billion km",
+      },
+      {
+        name: "Neptune",
+        icon: "💙",
+        color: "#2e5fe8",
+        orbitalPeriod: 60182.0,
+        distanceAU: 30.069,
+        distanceKm: "4.50 billion km",
+      },
+    ];
+
+    // ── BUILD DEFAULT PLANET CARDS ────────────────────────────────────────
+    function buildCards() {
+      const grid = document.getElementById('planetsGrid');
+      grid.innerHTML = '';
+      planets.forEach((p, i) => {
+        const card = document.createElement('div');
+        card.className = 'planet-card';
+        card.id = `pcard-${i}`;
+        card.innerHTML = `
+          <span class="planet-icon">${p.icon}</span>
+          <div class="planet-name">${p.name}</div>
+          <div class="planet-meta">${p.isStar ? 'The Star' : `${p.distanceAU} AU from Sun`}</div>
+          <div class="planet-default" id="pdefault-${i}">Enter age to calculate</div>
+          <div class="planet-result" id="presult-${i}">
+            <div class="result-age" id="page-${i}">—</div>
+            <div class="result-age-label">${p.isStar ? 'Solar Rotations' : 'Planetary Years'}</div>
+            <div class="result-stats">
+              <div class="stat-row">
+                <span class="stat-label">Orbital Period</span>
+                <span class="stat-value" id="pperiod-${i}">—</span>
+              </div>
+              <div class="stat-row">
+                <span class="stat-label">Revolutions</span>
+                <span class="stat-value" id="prevs-${i}">—</span>
+              </div>
+              <div class="stat-row">
+                <span class="stat-label">Distance from Sun</span>
+                <span class="stat-value" id="pdist-${i}">—</span>
+              </div>
+            </div>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    // ── CALCULATE ─────────────────────────────────────────────────────────
+    function calculateAges() {
+      const input = document.getElementById('earthAge');
+      const earthAgeYears = parseFloat(input.value);
+      if (!earthAgeYears || earthAgeYears <= 0 || earthAgeYears > 200) {
+        input.style.borderColor = '#e84545';
+        setTimeout(() => input.style.borderColor = '', 800);
+        return;
+      }
+      const earthAgeDays = earthAgeYears * 365.25;
+
+      planets.forEach((p, i) => {
+        const planetYears = earthAgeDays / p.orbitalPeriod;
+        const revolutions = planetYears;
+        const periodDays = p.orbitalPeriod;
+        const periodYears = (periodDays / 365.25).toFixed(2);
+
+        document.getElementById(`pdefault-${i}`).style.display = 'none';
+        const res = document.getElementById(`presult-${i}`);
+        res.classList.add('show');
+
+        document.getElementById(`page-${i}`).textContent = planetYears.toFixed(2);
+        document.getElementById(`pperiod-${i}`).textContent =
+          p.isStar ? `${periodDays} days` : `${periodDays} days (${periodYears} yr)`;
+        document.getElementById(`prevs-${i}`).textContent = revolutions.toFixed(2);
+        document.getElementById(`pdist-${i}`).textContent = p.distanceKm || '—';
+      });
+    }
+
+    // Enter key support
+    document.addEventListener('DOMContentLoaded', () => {
+      buildCards();
+      document.getElementById('earthAge').addEventListener('keydown', e => {
+        if (e.key === 'Enter') calculateAges();
+      });
+
+      // Build weekly clips
+      const weeklyGrid = document.getElementById('weeklyGrid');
+      const weekTitles = [
+        "Concept & Setup","Scene Building — Pt.1","Scene Building — Pt.2",
+        "Texture Mapping","Lighting Setup","Camera Animation",
+        "Render Test — Pt.1","Render Test — Pt.2","Post-Processing",
+        "Refinements","Final Render Pass","Export & Review"
+      ];
+      weekTitles.forEach((t, i) => {
+        weeklyGrid.innerHTML += `
+          <div class="module-card">
+            <div class="module-video">
+              <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:var(--navy-mid);">
+                <span style="font-family:var(--font-mono);font-size:0.62rem;color:var(--text-muted);">Week ${i+1} · 5s Clip</span>
+              </div>
+              <div class="no-click"></div>
+            </div>
+            <div class="module-info">
+              <div class="module-label">Week ${String(i+1).padStart(2,'0')}</div>
+              <div class="module-title">${t}</div>
+            </div>
+          </div>`;
+      });
+    });
+  </script>
+
+</body>
+</html>

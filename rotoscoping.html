@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Rotoscoping — Multimedia and Authoring</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --navy-deepest: #020b18;
+      --navy-deep:    #040f1e;
+      --navy-mid:     #071628;
+      --navy-card:    #0a1e38;
+      --navy-border:  #102845;
+      --navy-light:   #163460;
+      --accent:       #2e8fe8;
+      --accent-glow:  #3fa0ff;
+      --accent-soft:  rgba(46,143,232,0.12);
+      --accent-line:  rgba(46,143,232,0.4);
+      --gold:         #c8a96e;
+      --text-primary: #e8edf5;
+      --text-secondary:#8fa8c8;
+      --text-muted:   #4a6585;
+      --white:        #ffffff;
+      --font-display: 'Cormorant Garamond', serif;
+      --font-body:    'DM Sans', sans-serif;
+      --font-mono:    'DM Mono', monospace;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: var(--navy-deepest); color: var(--text-primary); font-family: var(--font-body); }
+
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 3rem; height: 64px;
+      background: rgba(2,11,24,0.92); backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--navy-border);
+    }
+    .nav-logo { font-family: var(--font-mono); font-size: 0.72rem; color: var(--accent); letter-spacing: 0.2em; text-transform: uppercase; text-decoration: none; }
+    .nav-links { display: flex; gap: 0.25rem; }
+    .nav-links a {
+      text-decoration: none; color: var(--text-secondary);
+      font-size: 0.82rem; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase;
+      padding: 0.5rem 1rem; border-radius: 4px; transition: color 0.2s, background 0.2s; position: relative;
+    }
+    .nav-links a:hover { color: var(--white); background: var(--accent-soft); }
+
+    /* PAGE HEADER */
+    .page-header {
+      padding: 9rem 2rem 5rem;
+      background: linear-gradient(180deg, var(--navy-deep) 0%, var(--navy-mid) 100%);
+      position: relative; overflow: hidden;
+    }
+    .page-header::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 70% 50% at 20% 50%, rgba(46,143,232,0.07) 0%, transparent 70%);
+    }
+    .header-inner { max-width: 1100px; margin: 0 auto; position: relative; z-index: 1; }
+    .breadcrumb {
+      font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.15em;
+      color: var(--text-muted); margin-bottom: 1.25rem;
+    }
+    .breadcrumb a { color: var(--accent); text-decoration: none; }
+    .breadcrumb span { margin: 0 0.4rem; }
+    .page-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.8rem, 6vw, 5rem);
+      font-weight: 700; color: var(--white); line-height: 1.0; margin-bottom: 0.75rem;
+    }
+    .page-title span { color: var(--accent); }
+    .page-tag {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 1rem;
+    }
+    .page-desc { color: var(--text-secondary); font-size: 1rem; line-height: 1.8; max-width: 680px; margin-top: 0.75rem; }
+
+    /* MAIN */
+    main { max-width: 1100px; margin: 0 auto; padding: 5rem 2rem 6rem; }
+
+    /* SECTION HEADERS */
+    .section-head { margin-bottom: 2.5rem; }
+    .section-label {
+      font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 0.6rem;
+    }
+    .section-label::before { content: '// '; opacity: 0.5; }
+    .section-title {
+      font-family: var(--font-display); font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+      font-weight: 700; color: var(--white); margin-bottom: 0.75rem;
+    }
+    .divider { width: 40px; height: 2px; background: linear-gradient(to right, var(--accent), transparent); margin-bottom: 1.25rem; }
+    .section-desc { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.8; max-width: 700px; }
+
+    .content-block { margin-bottom: 6rem; }
+
+    /* VIDEO EMBED */
+    .video-wrap {
+      position: relative; width: 100%;
+      aspect-ratio: 16/9;
+      background: var(--navy-card);
+      border: 1px solid var(--navy-border);
+      border-radius: 8px; overflow: hidden;
+    }
+    .video-wrap iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+    .video-placeholder {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem;
+      background: var(--navy-card);
+    }
+    .video-placeholder .placeholder-icon {
+      width: 64px; height: 64px; border-radius: 50%;
+      background: var(--accent-soft); border: 2px solid var(--accent-line);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .video-placeholder .placeholder-icon svg { width: 24px; height: 24px; fill: var(--accent); margin-left: 4px; }
+    .video-placeholder p { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.12em; color: var(--text-muted); text-align: center; }
+
+    /* STEPS */
+    .steps-list { display: flex; flex-direction: column; gap: 2px; }
+    .step-card {
+      background: var(--navy-card);
+      border: 1px solid var(--navy-border);
+      padding: 2rem 2.5rem;
+      display: grid; grid-template-columns: 60px 1fr;
+      gap: 1.5rem; align-items: start;
+      transition: border-color 0.25s;
+    }
+    .step-card:hover { border-color: var(--accent-line); }
+    .step-number {
+      font-family: var(--font-display); font-size: 3rem; font-weight: 700;
+      color: var(--accent); opacity: 0.25; line-height: 1;
+    }
+    .step-body {}
+    .step-title {
+      font-family: var(--font-display); font-size: 1.35rem; font-weight: 700;
+      color: var(--white); margin-bottom: 0.5rem;
+    }
+    .step-desc { color: var(--text-secondary); font-size: 0.9rem; line-height: 1.75; }
+
+    /* UNCLICKABLE VIDEO MODULE */
+    .module-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 2px; }
+    .module-card {
+      background: var(--navy-card);
+      border: 1px solid var(--navy-border);
+      overflow: hidden;
+    }
+    .module-video {
+      aspect-ratio: 16/9;
+      background: var(--navy-mid);
+      position: relative; overflow: hidden;
+    }
+    .module-video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; pointer-events: none; }
+    .module-video .no-click { position: absolute; inset: 0; z-index: 2; cursor: default; }
+    .module-info { padding: 1.25rem 1.5rem; }
+    .module-label {
+      font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 0.4rem;
+    }
+    .module-title { font-family: var(--font-display); font-size: 1.15rem; font-weight: 700; color: var(--white); margin-bottom: 0.4rem; }
+    .module-desc { color: var(--text-muted); font-size: 0.82rem; line-height: 1.6; }
+
+    /* WEEKLY GRID */
+    .weekly-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 2px; }
+
+    /* FOOTER */
+    footer { background: var(--navy-deep); border-top: 1px solid var(--navy-border); padding: 2.5rem 3rem; text-align: center; }
+    .footer-line { width: 60px; height: 1px; background: var(--accent-line); margin: 0 auto 1.25rem; }
+    .footer-text { color: var(--text-muted); font-size: 0.8rem; line-height: 2; }
+    .footer-text span { color: var(--text-secondary); }
+
+    @media (max-width: 700px) {
+      nav { padding: 0 1.25rem; }
+      .step-card { grid-template-columns: 1fr; }
+      .step-number { font-size: 2rem; opacity: 0.2; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="nav-logo">MMA · Portfolio</a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+    </div>
+  </nav>
+
+  <div class="page-header">
+    <div class="header-inner">
+      <div class="breadcrumb"><a href="index.html">Home</a><span>/</span>Projects<span>/</span>Rotoscoping</div>
+      <div class="page-tag">01 &nbsp;·&nbsp; Animation · Frame Tracing</div>
+      <h1 class="page-title">Roto<span>scoping</span><br/>Project</h1>
+      <p class="page-desc">
+        Rotoscoping is a classical animation technique in which animators trace over live-action footage frame by frame to create smooth, lifelike movement. Originally developed for traditional cel animation, it has evolved into a powerful digital technique used in modern film, music videos, and interactive media. By extracting and reinterpreting motion from real subjects, rotoscoping bridges the gap between reality and illustration.
+      </p>
+    </div>
+  </div>
+
+  <main>
+
+    <!-- FULL OUTPUT VIDEO -->
+    <div class="content-block">
+      <div class="section-head">
+        <div class="section-label">Final Output</div>
+        <h2 class="section-title">Complete Rotoscoping Video</h2>
+        <div class="divider"></div>
+        <p class="section-desc">The finished rotoscoped animation — the culmination of weeks of frame-by-frame tracing, editing, and rendering. Watch the full output below.</p>
+      </div>
+      <div class="video-wrap">
+        <!-- REPLACE src with your actual YouTube embed URL -->
+        <div class="video-placeholder">
+          <div class="placeholder-icon"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+          <p>Replace this with your YouTube embed link<br/>(iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID")</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP BY STEP -->
+    <div class="content-block">
+      <div class="section-head">
+        <div class="section-label">Process</div>
+        <h2 class="section-title">Step-by-Step Tutorial</h2>
+        <div class="divider"></div>
+        <p class="section-desc">A detailed walkthrough of the rotoscoping workflow — from initial setup to final export. Each step includes a supporting tutorial video clip.</p>
+      </div>
+
+      <div class="steps-list">
+
+        <!-- Step 1 -->
+        <div class="step-card">
+          <div class="step-number">01</div>
+          <div class="step-body">
+            <div class="step-title">Prepare the Applications</div>
+            <div class="step-desc">Install and configure Adobe After Effects and Adobe Photoshop. Set up your project workspace, import the source footage, and ensure all necessary plugins and export presets are ready before beginning the tracing process.</div>
+            <div style="margin-top:1rem">
+              <div class="module-video" style="max-width:500px; border-radius:4px; overflow:hidden;">
+                <!-- REPLACE with embed -->
+                <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:var(--navy-mid);">
+                  <span style="font-family:var(--font-mono);font-size:0.65rem;color:var(--text-muted);">Video — Step 1</span>
+                </div>
+                <div class="no-click"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="step-card">
+          <div class="step-number">02</div>
+          <div class="step-body">
+            <div class="step-title">Split the Video into 5-Second Clips</div>
+            <div class="step-desc">Divide the source footage into manageable 5-second segments. Working in shorter clips makes the rotoscoping process more precise and reduces errors when tracing motion across many frames.</div>
+            <div style="margin-top:1rem">
+              <div class="module-video" style="max-width:500px; position:relative; aspect-ratio:16/9; border-radius:4px; overflow:hidden;">
+                <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:var(--navy-mid);">
+                  <span style="font-family:var(--font-mono);font-size:0.65rem;color:var(--text-muted);">Video — Step 2</span>
+                </div>
+                <div class="no-click"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="step-card">
+          <div class="step-number">03</div>
+          <div class="step-body">
+            <div class="step-title">Open After Effects — Export via Render Queue</div>
+            <div class="step-desc">Import your footage into Adobe After Effects. Use the Roto Brush tool or manual masking to trace the subject frame by frame. Once complete, go to Composition → Add to Render Queue and export the rendered frames as an image sequence.</div>
+            <div style="margin-top:1rem">
+              <div class="module-video" style="max-width:500px; position:relative; aspect-ratio:16/9; border-radius:4px; overflow:hidden;">
+                <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:var(--navy-mid);">
+                  <span style="font-family:var(--font-mono);font-size:0.65rem;color:var(--text-muted);">Video — Step 3</span>
+                </div>
+                <div class="no-click"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="step-card">
+          <div class="step-number">04</div>
+          <div class="step-body">
+            <div class="step-title">Import Rendered Frames into Photoshop</div>
+            <div class="step-desc">After rendering is complete, open Adobe Photoshop and import the exported image sequence. Photoshop's Timeline panel allows you to view and work with each frame individually for detailed cleanup and artistic editing.</div>
+            <div style="margin-top:1rem">
+              <div class="module-video" style="max-width:500px; position:relative; aspect-ratio:16/9; border-radius:4px; overflow:hidden;">
+                <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:var(--navy-mid);">
+                  <span style="font-family:var(--font-mono);font-size:0.65rem;color:var(--text-muted);">Video — Step 4</span>
+                </div>
+                <div class="no-click"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 5 -->
+        <div class="step-card">
+          <div class="step-number">05</div>
+          <div class="step-body">
+            <div class="step-title">Edit the Rendered Frames</div>
+            <div class="step-desc">With all frames imported, apply your artistic style — adjust colors, clean up edges, add effects, or stylize the traced figures. Once all frames are polished, export the final animation as a video file for the complete rotoscoped output.</div>
+            <div style="margin-top:1rem">
+              <div class="module-video" style="max-width:500px; position:relative; aspect-ratio:16/9; border-radius:4px; overflow:hidden;">
+                <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:var(--navy-mid);">
+                  <span style="font-family:var(--font-mono);font-size:0.65rem;color:var(--text-muted);">Video — Step 5</span>
+                </div>
+                <div class="no-click"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- WEEKLY PROGRESS -->
+    <div class="content-block">
+      <div class="section-head">
+        <div class="section-label">Progress Log</div>
+        <h2 class="section-title">Weekly Progress — 12 Weeks</h2>
+        <div class="divider"></div>
+        <p class="section-desc">Documented week-by-week progress across the entire project duration. Each module contains a short video clip representing that week's work.</p>
+      </div>
+
+      <div class="weekly-grid">
+        <!-- Generate 12 week modules -->
+        <script>
+          const weeks = [
+            "Project Briefing & Setup",
+            "Source Footage Selection",
+            "Footage Splitting — 5s Clips",
+            "After Effects Setup",
+            "Roto Brush Pass 1",
+            "Roto Brush Pass 2 & Cleanup",
+            "Frame Export & Render Queue",
+            "Photoshop Import",
+            "Frame Editing — Part 1",
+            "Frame Editing — Part 2",
+            "Final Assembly",
+            "Final Output & Review"
+          ];
+          weeks.forEach((w, i) => {
+            document.write(`
+            <div class="module-card">
+              <div class="module-video" style="position:relative;">
+                <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:var(--navy-mid);aspect-ratio:16/9;">
+                  <span style="font-family:var(--font-mono);font-size:0.62rem;color:var(--text-muted);">Week ${i+1} Clip</span>
+                </div>
+                <div class="no-click"></div>
+              </div>
+              <div class="module-info">
+                <div class="module-label">Week ${String(i+1).padStart(2,'0')}</div>
+                <div class="module-title">${w}</div>
+              </div>
+            </div>`);
+          });
+        </script>
+      </div>
+      <p style="font-family:var(--font-mono);font-size:0.68rem;color:var(--text-muted);margin-top:1.5rem;letter-spacing:0.1em;">
+        * Replace placeholder video slots with your actual YouTube embed iframes (pointer-events: none applied).
+      </p>
+    </div>
+
+  </main>
+
+  <footer>
+    <div class="footer-line"></div>
+    <div class="footer-text">
+      <span>© 2026 Lance Christian Bernales</span><br/>
+      BSIT-NS-2A &nbsp;·&nbsp; All rights reserved.<br/>
+      For educational purposes only.
+    </div>
+  </footer>
+
+</body>
+</html>

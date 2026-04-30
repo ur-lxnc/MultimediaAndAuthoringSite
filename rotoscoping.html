@@ -130,6 +130,7 @@
       font-family: var(--font-display); font-size: 3rem; font-weight: 700;
       color: var(--accent); opacity: 0.25; line-height: 1;
     }
+    .step-body {}
     .step-title {
       font-family: var(--font-display); font-size: 1.35rem; font-weight: 700;
       color: var(--white); margin-bottom: 0.5rem;
@@ -221,22 +222,23 @@
 
       <div class="steps-list">
 
+        <!-- Step 1 -->
         <div class="step-card">
           <div class="step-number">01</div>
           <div class="step-body">
             <div class="step-title">Prepare the Applications</div>
             <div class="step-desc">Install and configure Adobe After Effects and Adobe Photoshop. Set up your project workspace, import the source footage, and ensure all necessary plugins and export presets are ready before beginning the tracing process.</div>
             <div style="margin-top:1rem">
-              <div class="module-video" style="max-width:500px; border-radius:4px; overflow:hidden;">
+              <div class="module-video" style="max-width:500px; position:relative; aspect-ratio:16/9; border-radius:4px; overflow:hidden;">
                 <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:var(--navy-mid);">
                   <span style="font-family:var(--font-mono);font-size:0.65rem;color:var(--text-muted);">Video — Step 1</span>
                 </div>
-                <div class="no-click"></div>
               </div>
             </div>
           </div>
         </div>
 
+        <!-- Step 2 -->
         <div class="step-card">
           <div class="step-number">02</div>
           <div class="step-body">
@@ -247,12 +249,12 @@
                 <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:var(--navy-mid);">
                   <span style="font-family:var(--font-mono);font-size:0.65rem;color:var(--text-muted);">Video — Step 2</span>
                 </div>
-                <div class="no-click"></div>
               </div>
             </div>
           </div>
         </div>
 
+        <!-- Step 3 -->
         <div class="step-card">
           <div class="step-number">03</div>
           <div class="step-body">
@@ -263,12 +265,12 @@
                 <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:var(--navy-mid);">
                   <span style="font-family:var(--font-mono);font-size:0.65rem;color:var(--text-muted);">Video — Step 3</span>
                 </div>
-                <div class="no-click"></div>
               </div>
             </div>
           </div>
         </div>
 
+        <!-- Step 4 -->
         <div class="step-card">
           <div class="step-number">04</div>
           <div class="step-body">
@@ -279,12 +281,12 @@
                 <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:var(--navy-mid);">
                   <span style="font-family:var(--font-mono);font-size:0.65rem;color:var(--text-muted);">Video — Step 4</span>
                 </div>
-                <div class="no-click"></div>
               </div>
             </div>
           </div>
         </div>
 
+        <!-- Step 5 -->
         <div class="step-card">
           <div class="step-number">05</div>
           <div class="step-body">
@@ -295,7 +297,6 @@
                 <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:var(--navy-mid);">
                   <span style="font-family:var(--font-mono);font-size:0.65rem;color:var(--text-muted);">Video — Step 5</span>
                 </div>
-                <div class="no-click"></div>
               </div>
             </div>
           </div>
@@ -315,7 +316,7 @@
 
       <div class="weekly-grid">
 
-        <!-- Week 1 — YouTube embed -->
+        <!-- Week 1 -->
         <div class="module-card">
           <div class="module-video" style="position:relative;">
             <iframe src="https://www.youtube.com/embed/SnZH8jGDYr8" title="Week 1 — Project Briefing & Setup" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -326,7 +327,7 @@
           </div>
         </div>
 
-        <!-- Week 2 — YouTube embed -->
+        <!-- Week 2 -->
         <div class="module-card">
           <div class="module-video" style="position:relative;">
             <iframe src="https://www.youtube.com/embed/fmiqAZasffo" title="Week 2 — Source Footage Selection" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -337,36 +338,134 @@
           </div>
         </div>
 
-        <!-- Weeks 3–12 remain as placeholders -->
-        <script>
-          const weeks = [
-            "Footage Splitting — 5s Clips",
-            "After Effects Setup",
-            "Roto Brush Pass 1",
-            "Roto Brush Pass 2 & Cleanup",
-            "Frame Export & Render Queue",
-            "Photoshop Import",
-            "Frame Editing — Part 1",
-            "Frame Editing — Part 2",
-            "Final Assembly",
-            "Final Output & Review"
-          ];
-          weeks.forEach((w, i) => {
-            const weekNum = i + 3;
-            document.write(`
-            <div class="module-card">
-              <div class="module-video" style="position:relative;">
-                <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:var(--navy-mid);aspect-ratio:16/9;">
-                  <span style="font-family:var(--font-mono);font-size:0.62rem;color:var(--text-muted);">Week ${weekNum} Clip</span>
-                </div>
-              </div>
-              <div class="module-info">
-                <div class="module-label">Week ${String(weekNum).padStart(2,'0')}</div>
-                <div class="module-title">${w}</div>
-              </div>
-            </div>`);
-          });
-        </script>
+        <!-- Week 3 -->
+        <div class="module-card">
+          <div class="module-video" style="position:relative;">
+            <iframe src="https://www.youtube.com/embed/Ia7bCdKv5GE" title="Week 3 — Footage Splitting" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+          <div class="module-info">
+            <div class="module-label">Week 03</div>
+            <div class="module-title">Footage Splitting — 5s Clips</div>
+          </div>
+        </div>
+
+        <!-- Week 4 — placeholder -->
+        <div class="module-card">
+          <div class="module-video" style="position:relative;">
+            <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:var(--navy-mid);">
+              <span style="font-family:var(--font-mono);font-size:0.62rem;color:var(--text-muted);">Week 4 Clip</span>
+            </div>
+          </div>
+          <div class="module-info">
+            <div class="module-label">Week 04</div>
+            <div class="module-title">After Effects Setup</div>
+          </div>
+        </div>
+
+        <!-- Week 5 — placeholder -->
+        <div class="module-card">
+          <div class="module-video" style="position:relative;">
+            <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:var(--navy-mid);">
+              <span style="font-family:var(--font-mono);font-size:0.62rem;color:var(--text-muted);">Week 5 Clip</span>
+            </div>
+          </div>
+          <div class="module-info">
+            <div class="module-label">Week 05</div>
+            <div class="module-title">Roto Brush Pass 1</div>
+          </div>
+        </div>
+
+        <!-- Week 6 — placeholder -->
+        <div class="module-card">
+          <div class="module-video" style="position:relative;">
+            <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:var(--navy-mid);">
+              <span style="font-family:var(--font-mono);font-size:0.62rem;color:var(--text-muted);">Week 6 Clip</span>
+            </div>
+          </div>
+          <div class="module-info">
+            <div class="module-label">Week 06</div>
+            <div class="module-title">Roto Brush Pass 2 &amp; Cleanup</div>
+          </div>
+        </div>
+
+        <!-- Week 7 — placeholder -->
+        <div class="module-card">
+          <div class="module-video" style="position:relative;">
+            <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:var(--navy-mid);">
+              <span style="font-family:var(--font-mono);font-size:0.62rem;color:var(--text-muted);">Week 7 Clip</span>
+            </div>
+          </div>
+          <div class="module-info">
+            <div class="module-label">Week 07</div>
+            <div class="module-title">Frame Export &amp; Render Queue</div>
+          </div>
+        </div>
+
+        <!-- Week 8 — placeholder -->
+        <div class="module-card">
+          <div class="module-video" style="position:relative;">
+            <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:var(--navy-mid);">
+              <span style="font-family:var(--font-mono);font-size:0.62rem;color:var(--text-muted);">Week 8 Clip</span>
+            </div>
+          </div>
+          <div class="module-info">
+            <div class="module-label">Week 08</div>
+            <div class="module-title">Photoshop Import</div>
+          </div>
+        </div>
+
+        <!-- Week 9 — placeholder -->
+        <div class="module-card">
+          <div class="module-video" style="position:relative;">
+            <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:var(--navy-mid);">
+              <span style="font-family:var(--font-mono);font-size:0.62rem;color:var(--text-muted);">Week 9 Clip</span>
+            </div>
+          </div>
+          <div class="module-info">
+            <div class="module-label">Week 09</div>
+            <div class="module-title">Frame Editing — Part 1</div>
+          </div>
+        </div>
+
+        <!-- Week 10 — placeholder -->
+        <div class="module-card">
+          <div class="module-video" style="position:relative;">
+            <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:var(--navy-mid);">
+              <span style="font-family:var(--font-mono);font-size:0.62rem;color:var(--text-muted);">Week 10 Clip</span>
+            </div>
+          </div>
+          <div class="module-info">
+            <div class="module-label">Week 10</div>
+            <div class="module-title">Frame Editing — Part 2</div>
+          </div>
+        </div>
+
+        <!-- Week 11 — placeholder -->
+        <div class="module-card">
+          <div class="module-video" style="position:relative;">
+            <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:var(--navy-mid);">
+              <span style="font-family:var(--font-mono);font-size:0.62rem;color:var(--text-muted);">Week 11 Clip</span>
+            </div>
+          </div>
+          <div class="module-info">
+            <div class="module-label">Week 11</div>
+            <div class="module-title">Final Assembly</div>
+          </div>
+        </div>
+
+        <!-- Week 12 — placeholder -->
+        <div class="module-card">
+          <div class="module-video" style="position:relative;">
+            <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:var(--navy-mid);">
+              <span style="font-family:var(--font-mono);font-size:0.62rem;color:var(--text-muted);">Week 12 Clip</span>
+            </div>
+          </div>
+          <div class="module-info">
+            <div class="module-label">Week 12</div>
+            <div class="module-title">Final Output &amp; Review</div>
+          </div>
+        </div>
+
       </div>
       <p style="font-family:var(--font-mono);font-size:0.68rem;color:var(--text-muted);margin-top:1.5rem;letter-spacing:0.1em;">
         * Replace placeholder video slots with your actual YouTube embed iframes.

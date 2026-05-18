@@ -83,3 +83,393 @@
     .section-head { margin-bottom: 2.5rem; }
     .section-label {
       font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 0.6rem;
+    }
+    .section-label::before { content: '// '; opacity: 0.5; }
+    .section-title {
+      font-family: var(--font-display); font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+      font-weight: 700; color: var(--white); margin-bottom: 0.75rem;
+    }
+    .divider { width: 40px; height: 2px; background: linear-gradient(to right, var(--accent), transparent); margin-bottom: 1.25rem; }
+    .section-desc { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.8; max-width: 700px; }
+
+    .content-block { margin-bottom: 6rem; }
+
+    .video-wrap {
+      position: relative; width: 100%;
+      aspect-ratio: 16/9;
+      background: var(--navy-card);
+      border: 1px solid var(--navy-border);
+      border-radius: 8px; overflow: hidden;
+    }
+    .video-wrap iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+    .video-placeholder {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem;
+      background: var(--navy-card);
+    }
+    .video-placeholder .placeholder-icon {
+      width: 64px; height: 64px; border-radius: 50%;
+      background: var(--accent-soft); border: 2px solid var(--accent-line);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .video-placeholder .placeholder-icon svg { width: 24px; height: 24px; fill: var(--accent); margin-left: 4px; }
+    .video-placeholder p { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.12em; color: var(--text-muted); text-align: center; }
+
+    .steps-list { display: flex; flex-direction: column; gap: 2px; }
+    .step-card {
+      background: var(--navy-card);
+      border: 1px solid var(--navy-border);
+      padding: 2rem 2.5rem;
+      display: grid; grid-template-columns: 60px 1fr;
+      gap: 1.5rem; align-items: start;
+      transition: border-color 0.25s;
+    }
+    .step-card:hover { border-color: var(--accent-line); }
+    .step-number {
+      font-family: var(--font-display); font-size: 3rem; font-weight: 700;
+      color: var(--accent); opacity: 0.25; line-height: 1;
+    }
+    .step-body {}
+    .step-title {
+      font-family: var(--font-display); font-size: 1.35rem; font-weight: 700;
+      color: var(--white); margin-bottom: 0.5rem;
+    }
+    .step-desc { color: var(--text-secondary); font-size: 0.9rem; line-height: 1.75; }
+
+    .module-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 2px; }
+    .module-card {
+      background: var(--navy-card);
+      border: 1px solid var(--navy-border);
+      overflow: hidden;
+    }
+    .module-video {
+      aspect-ratio: 16/9;
+      background: var(--navy-mid);
+      position: relative; overflow: hidden;
+    }
+    .module-video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+    .module-video .no-click { position: absolute; inset: 0; z-index: 2; cursor: default; }
+    .module-info { padding: 1.25rem 1.5rem; }
+    .module-label {
+      font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 0.4rem;
+    }
+    .module-title { font-family: var(--font-display); font-size: 1.15rem; font-weight: 700; color: var(--white); margin-bottom: 0.4rem; }
+    .module-desc { color: var(--text-muted); font-size: 0.82rem; line-height: 1.6; }
+
+    .weekly-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 2px; }
+
+    footer { background: var(--navy-deep); border-top: 1px solid var(--navy-border); padding: 2.5rem 3rem; text-align: center; }
+    .footer-line { width: 60px; height: 1px; background: var(--accent-line); margin: 0 auto 1.25rem; }
+    .footer-text { color: var(--text-muted); font-size: 0.8rem; line-height: 2; }
+    .footer-text span { color: var(--text-secondary); }
+
+    @media (max-width: 700px) {
+      nav { padding: 0 1.25rem; }
+      .step-card { grid-template-columns: 1fr; }
+      .step-number { font-size: 2rem; opacity: 0.2; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a href="index.html" class="nav-logo">MMA · Portfolio</a>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+    </div>
+  </nav>
+
+  <div class="page-header">
+    <div class="header-inner">
+      <div class="breadcrumb"><a href="index.html">Home</a><span>/</span>Projects<span>/</span>Rotoscoping</div>
+      <div class="page-tag">01 &nbsp;·&nbsp; Animation · Frame Tracing</div>
+      <h1 class="page-title">Roto<span>scoping</span><br/>Project</h1>
+      <p class="page-desc">
+        Rotoscoping is a classical animation technique in which animators trace over live-action footage frame by frame to create smooth, lifelike movement. Originally developed for traditional cel animation, it has evolved into a powerful digital technique used in modern film, music videos, and interactive media. By extracting and reinterpreting motion from real subjects, rotoscoping bridges the gap between reality and illustration.
+      </p>
+    </div>
+  </div>
+
+  <main>
+
+    <!-- FULL OUTPUT VIDEO -->
+    <div class="content-block">
+      <div class="section-head">
+        <div class="section-label">Final Output</div>
+        <h2 class="section-title">Complete Rotoscoping Video</h2>
+        <div class="divider"></div>
+        <p class="section-desc">The finished rotoscoped animation — the culmination of weeks of frame-by-frame tracing, editing, and rendering. Watch the full output below.</p>
+      </div>
+      <div class="video-wrap">
+        <div class="video-placeholder">
+          <div class="placeholder-icon"><svg viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg></div>
+          <p>Replace this with your YouTube embed link<br/>(iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID")</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP BY STEP -->
+    <div class="content-block">
+      <div class="section-head">
+        <div class="section-label">Process</div>
+        <h2 class="section-title">Step-by-Step Tutorial</h2>
+        <div class="divider"></div>
+        <p class="section-desc">A detailed walkthrough of the rotoscoping workflow — from initial setup to final export. Each step includes a supporting tutorial video clip.</p>
+      </div>
+
+      <div class="steps-list">
+
+        <!-- Step 1 -->
+        <div class="step-card">
+          <div class="step-number">01</div>
+          <div class="step-body">
+            <div class="step-title">Prepare the Applications</div>
+            <div class="step-desc">Install and configure Adobe After Effects and Adobe Photoshop. Set up your project workspace, import the source footage, and ensure all necessary plugins and export presets are ready before beginning the tracing process.</div>
+            <div style="margin-top:1rem">
+              <div class="module-video" style="max-width:500px; position:relative; aspect-ratio:16/9; border-radius:4px; overflow:hidden;">
+                <iframe src="https://www.youtube.com/embed/3xjEOi3-bfc" title="Step 1 — Prepare the Applications" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="step-card">
+          <div class="step-number">02</div>
+          <div class="step-body">
+            <div class="step-title">Split the Video into 5-Second Clips</div>
+            <div class="step-desc">Divide the source footage into manageable 5-second segments. Working in shorter clips makes the rotoscoping process more precise and reduces errors when tracing motion across many frames.</div>
+            <div style="margin-top:1rem">
+              <div class="module-video" style="max-width:500px; position:relative; aspect-ratio:16/9; border-radius:4px; overflow:hidden;">
+                <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:var(--navy-mid);">
+                  <span style="font-family:var(--font-mono);font-size:0.65rem;color:var(--text-muted);">Video — Step 2</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="step-card">
+          <div class="step-number">03</div>
+          <div class="step-body">
+            <div class="step-title">Open After Effects — Export via Render Queue</div>
+            <div class="step-desc">Import your footage into Adobe After Effects. Use the Roto Brush tool or manual masking to trace the subject frame by frame. Once complete, go to Composition → Add to Render Queue and export the rendered frames as an image sequence.</div>
+            <div style="margin-top:1rem">
+              <div class="module-video" style="max-width:500px; position:relative; aspect-ratio:16/9; border-radius:4px; overflow:hidden;">
+                <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:var(--navy-mid);">
+                  <span style="font-family:var(--font-mono);font-size:0.65rem;color:var(--text-muted);">Video — Step 3</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="step-card">
+          <div class="step-number">04</div>
+          <div class="step-body">
+            <div class="step-title">Import Rendered Frames into Photoshop</div>
+            <div class="step-desc">After rendering is complete, open Adobe Photoshop and import the exported image sequence. Photoshop's Timeline panel allows you to view and work with each frame individually for detailed cleanup and artistic editing.</div>
+            <div style="margin-top:1rem">
+              <div class="module-video" style="max-width:500px; position:relative; aspect-ratio:16/9; border-radius:4px; overflow:hidden;">
+                <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:var(--navy-mid);">
+                  <span style="font-family:var(--font-mono);font-size:0.65rem;color:var(--text-muted);">Video — Step 4</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 5 -->
+        <div class="step-card">
+          <div class="step-number">05</div>
+          <div class="step-body">
+            <div class="step-title">Edit the Rendered Frames</div>
+            <div class="step-desc">With all frames imported, apply your artistic style — adjust colors, clean up edges, add effects, or stylize the traced figures. Once all frames are polished, export the final animation as a video file for the complete rotoscoped output.</div>
+            <div style="margin-top:1rem">
+              <div class="module-video" style="max-width:500px; position:relative; aspect-ratio:16/9; border-radius:4px; overflow:hidden;">
+                <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:var(--navy-mid);">
+                  <span style="font-family:var(--font-mono);font-size:0.65rem;color:var(--text-muted);">Video — Step 5</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- WEEKLY PROGRESS -->
+    <div class="content-block">
+      <div class="section-head">
+        <div class="section-label">Progress Log</div>
+        <h2 class="section-title">Weekly Progress — 12 Weeks</h2>
+        <div class="divider"></div>
+        <p class="section-desc">Documented week-by-week progress across the entire project duration. Each module contains a short video clip representing that week's work.</p>
+      </div>
+
+      <div class="weekly-grid">
+
+        <!-- Week 1 -->
+        <div class="module-card">
+          <div class="module-video" style="position:relative;">
+            <iframe src="https://www.youtube.com/embed/SnZH8jGDYr8" title="Week 1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+          <div class="module-info">
+            <div class="module-label">Week 01</div>
+            <div class="module-title">Clip 0-5 seconds; Setup</div>
+          </div>
+        </div>
+
+        <!-- Week 2 -->
+        <div class="module-card">
+          <div class="module-video" style="position:relative;">
+            <iframe src="https://www.youtube.com/embed/fmiqAZasffo" title="Week 2" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+          <div class="module-info">
+            <div class="module-label">Week 02</div>
+            <div class="module-title">Clip 5-10 seconds</div>
+          </div>
+        </div>
+
+        <!-- Week 3 -->
+        <div class="module-card">
+          <div class="module-video" style="position:relative;">
+            <iframe src="https://www.youtube.com/embed/Ia7bCdKv5GE" title="Week 3" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+          <div class="module-info">
+            <div class="module-label">Week 03</div>
+            <div class="module-title">Clip 10-15 seconds</div>
+          </div>
+        </div>
+
+        <!-- Week 4 -->
+        <div class="module-card">
+          <div class="module-video" style="position:relative;">
+            <iframe src="https://www.youtube.com/embed/yLJomH2qZxI" title="Week 4" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+          <div class="module-info">
+            <div class="module-label">Week 04</div>
+            <div class="module-title">Clip 15-20 seconds</div>
+          </div>
+        </div>
+
+        <!-- Week 5 -->
+        <div class="module-card">
+          <div class="module-video" style="position:relative;">
+            <iframe src="https://www.youtube.com/embed/V_hPaEhbqLg" title="Week 5" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+          <div class="module-info">
+            <div class="module-label">Week 05</div>
+            <div class="module-title">Clip 20-25 seconds</div>
+          </div>
+        </div>
+
+        <!-- Week 6 -->
+        <div class="module-card">
+          <div class="module-video" style="position:relative;">
+            <iframe src="https://www.youtube.com/embed/g0W2mAVerr0" title="Week 6" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+          <div class="module-info">
+            <div class="module-label">Week 06</div>
+            <div class="module-title">Clip 25-30 seconds</div>
+          </div>
+        </div>
+
+        <!-- Week 7 -->
+        <div class="module-card">
+          <div class="module-video" style="position:relative;">
+            <iframe src="https://www.youtube.com/embed/47IydllWvqA" title="Week 7" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+          <div class="module-info">
+            <div class="module-label">Week 07</div>
+            <div class="module-title">Clip 30-35 seconds</div>
+          </div>
+        </div>
+
+        <!-- Week 8 -->
+        <div class="module-card">
+          <div class="module-video" style="position:relative;">
+            <iframe src="https://www.youtube.com/embed/xDRlOT9syz8" title="Week 8" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+          </div>
+          <div class="module-info">
+            <div class="module-label">Week 08</div>
+            <div class="module-title">Clip 35-40 seconds</div>
+          </div>
+        </div>
+
+        <!-- Week 9 — placeholder -->
+        <div class="module-card">
+          <div class="module-video" style="position:relative;">
+            <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:var(--navy-mid);">
+              <span style="font-family:var(--font-mono);font-size:0.62rem;color:var(--text-muted);">Week 9 Clip</span>
+            </div>
+          </div>
+          <div class="module-info">
+            <div class="module-label">Week 09</div>
+            <div class="module-title">Clip 40-45 seconds</div>
+          </div>
+        </div>
+
+        <!-- Week 10 — placeholder -->
+        <div class="module-card">
+          <div class="module-video" style="position:relative;">
+            <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:var(--navy-mid);">
+              <span style="font-family:var(--font-mono);font-size:0.62rem;color:var(--text-muted);">Week 10 Clip</span>
+            </div>
+          </div>
+          <div class="module-info">
+            <div class="module-label">Week 10</div>
+            <div class="module-title">Clip 45-50 seconds</div>
+          </div>
+        </div>
+
+        <!-- Week 11 — placeholder -->
+        <div class="module-card">
+          <div class="module-video" style="position:relative;">
+            <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:var(--navy-mid);">
+              <span style="font-family:var(--font-mono);font-size:0.62rem;color:var(--text-muted);">Week 11 Clip</span>
+            </div>
+          </div>
+          <div class="module-info">
+            <div class="module-label">Week 11</div>
+            <div class="module-title">Clip 50-55 seconds</div>
+          </div>
+        </div>
+
+        <!-- Week 12 — placeholder -->
+        <div class="module-card">
+          <div class="module-video" style="position:relative;">
+            <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:var(--navy-mid);">
+              <span style="font-family:var(--font-mono);font-size:0.62rem;color:var(--text-muted);">Week 12 Clip</span>
+            </div>
+          </div>
+          <div class="module-info">
+            <div class="module-label">Week 12</div>
+            <div class="module-title">Clip 55-60 seconds</div>
+          </div>
+        </div>
+
+      </div>
+      <p style="font-family:var(--font-mono);font-size:0.68rem;color:var(--text-muted);margin-top:1.5rem;letter-spacing:0.1em;">
+        * Replace placeholder video slots with your actual YouTube embed iframes.
+      </p>
+    </div>
+
+  </main>
+
+  <footer>
+    <div class="footer-line"></div>
+    <div class="footer-text">
+      <span>© 2026 Lance Christian Bernales</span><br/>
+      BSIT-NS-2A &nbsp;·&nbsp; All rights reserved.<br/>
+      For educational purposes only.
+    </div>
+  </footer>
+
+</body>
+</html>

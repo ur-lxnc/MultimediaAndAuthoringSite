@@ -103,18 +103,6 @@
       border-radius: 8px; overflow: hidden;
     }
     .video-wrap iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
-    .video-placeholder {
-      position: absolute; inset: 0;
-      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem;
-      background: var(--navy-card);
-    }
-    .video-placeholder .placeholder-icon {
-      width: 64px; height: 64px; border-radius: 50%;
-      background: var(--accent-soft); border: 2px solid var(--accent-line);
-      display: flex; align-items: center; justify-content: center;
-    }
-    .video-placeholder .placeholder-icon svg { width: 24px; height: 24px; fill: var(--accent); margin-left: 4px; }
-    .video-placeholder p { font-family: var(--font-mono); font-size: 0.72rem; letter-spacing: 0.12em; color: var(--text-muted); text-align: center; }
 
     .steps-list { display: flex; flex-direction: column; gap: 2px; }
     .step-card {
@@ -137,7 +125,6 @@
     }
     .step-desc { color: var(--text-secondary); font-size: 0.9rem; line-height: 1.75; }
 
-    .module-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 2px; }
     .module-card {
       background: var(--navy-card);
       border: 1px solid var(--navy-border);
@@ -149,7 +136,6 @@
       position: relative; overflow: hidden;
     }
     .module-video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
-    .module-video .no-click { position: absolute; inset: 0; z-index: 2; cursor: default; }
     .module-info { padding: 1.25rem 1.5rem; }
     .module-label {
       font-family: var(--font-mono); font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase;
@@ -208,13 +194,13 @@
       </div>
     </div>
 
-    <!-- STEP BY STEP -->
+    <!-- SOURCE MATERIAL -->
     <div class="content-block">
       <div class="section-head">
-        <div class="section-label">Process</div>
-        <h2 class="section-title">Step-by-Step Tutorial</h2>
+        <div class="section-label">Source Material</div>
+        <h2 class="section-title">Source Material</h2>
         <div class="divider"></div>
-        <p class="section-desc">A detailed walkthrough of the rotoscoping workflow — from initial setup to final export. Each step includes a supporting tutorial video clip.</p>
+        <p class="section-desc">The original source footage and reference material used as the foundation for the rotoscoping process.</p>
       </div>
 
       <div class="steps-list">
@@ -228,70 +214,6 @@
             <div style="margin-top:1rem">
               <div class="module-video" style="max-width:500px; position:relative; aspect-ratio:16/9; border-radius:4px; overflow:hidden;">
                 <iframe src="https://www.youtube.com/embed/3xjEOi3-bfc" title="Step 1 — Prepare the Applications" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Step 2 -->
-        <div class="step-card">
-          <div class="step-number">02</div>
-          <div class="step-body">
-            <div class="step-title">Split the Video into 5-Second Clips</div>
-            <div class="step-desc">Divide the source footage into manageable 5-second segments. Working in shorter clips makes the rotoscoping process more precise and reduces errors when tracing motion across many frames.</div>
-            <div style="margin-top:1rem">
-              <div class="module-video" style="max-width:500px; position:relative; aspect-ratio:16/9; border-radius:4px; overflow:hidden;">
-                <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:var(--navy-mid);">
-                  <span style="font-family:var(--font-mono);font-size:0.65rem;color:var(--text-muted);">Video — Step 2</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Step 3 -->
-        <div class="step-card">
-          <div class="step-number">03</div>
-          <div class="step-body">
-            <div class="step-title">Open After Effects — Export via Render Queue</div>
-            <div class="step-desc">Import your footage into Adobe After Effects. Use the Roto Brush tool or manual masking to trace the subject frame by frame. Once complete, go to Composition → Add to Render Queue and export the rendered frames as an image sequence.</div>
-            <div style="margin-top:1rem">
-              <div class="module-video" style="max-width:500px; position:relative; aspect-ratio:16/9; border-radius:4px; overflow:hidden;">
-                <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:var(--navy-mid);">
-                  <span style="font-family:var(--font-mono);font-size:0.65rem;color:var(--text-muted);">Video — Step 3</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Step 4 -->
-        <div class="step-card">
-          <div class="step-number">04</div>
-          <div class="step-body">
-            <div class="step-title">Import Rendered Frames into Photoshop</div>
-            <div class="step-desc">After rendering is complete, open Adobe Photoshop and import the exported image sequence. Photoshop's Timeline panel allows you to view and work with each frame individually for detailed cleanup and artistic editing.</div>
-            <div style="margin-top:1rem">
-              <div class="module-video" style="max-width:500px; position:relative; aspect-ratio:16/9; border-radius:4px; overflow:hidden;">
-                <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:var(--navy-mid);">
-                  <span style="font-family:var(--font-mono);font-size:0.65rem;color:var(--text-muted);">Video — Step 4</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Step 5 -->
-        <div class="step-card">
-          <div class="step-number">05</div>
-          <div class="step-body">
-            <div class="step-title">Edit the Rendered Frames</div>
-            <div class="step-desc">With all frames imported, apply your artistic style — adjust colors, clean up edges, add effects, or stylize the traced figures. Once all frames are polished, export the final animation as a video file for the complete rotoscoped output.</div>
-            <div style="margin-top:1rem">
-              <div class="module-video" style="max-width:500px; position:relative; aspect-ratio:16/9; border-radius:4px; overflow:hidden;">
-                <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:var(--navy-mid);">
-                  <span style="font-family:var(--font-mono);font-size:0.65rem;color:var(--text-muted);">Video — Step 5</span>
-                </div>
               </div>
             </div>
           </div>

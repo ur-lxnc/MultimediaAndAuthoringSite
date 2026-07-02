@@ -104,12 +104,73 @@
     }
     .video-wrap iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
 
-    .video-credit {
-      font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.03em;
-      color: var(--text-muted); line-height: 1.7; margin-top: 0.85rem;
-      border-left: 2px solid var(--accent-line); padding-left: 0.85rem;
+    /* ── COPYRIGHT NOTICE BOX ─────────────────────────────────────── */
+    .copyright-notice {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-top: 1.25rem;
+      padding: 1rem 1.25rem;
+      background: rgba(200, 169, 110, 0.08);
+      border: 1px solid rgba(200, 169, 110, 0.35);
+      border-left: 4px solid #c8a96e;
+      border-radius: 6px;
     }
-    .video-credit strong { color: var(--text-secondary); font-weight: 500; }
+    .copyright-notice .notice-icon {
+      font-size: 1.2rem;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .copyright-notice .notice-body {
+      flex: 1;
+    }
+    .copyright-notice .notice-label {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #c8a96e;
+      margin-bottom: 0.4rem;
+      font-weight: 600;
+    }
+    .copyright-notice .notice-text {
+      font-size: 0.88rem;
+      line-height: 1.75;
+      color: #c9d8e8;
+    }
+    .copyright-notice .notice-text strong {
+      color: #e8d5a3;
+      font-weight: 600;
+    }
+
+    /* ── SECTION-LEVEL COPYRIGHT ──────────────────────────────────── */
+    .section-copyright {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-top: 1.25rem;
+      padding: 1rem 1.25rem;
+      background: rgba(46, 143, 232, 0.07);
+      border: 1px solid rgba(46, 143, 232, 0.25);
+      border-left: 4px solid var(--accent);
+      border-radius: 6px;
+    }
+    .section-copyright .notice-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 2px; }
+    .section-copyright .notice-label {
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.4rem;
+      font-weight: 600;
+    }
+    .section-copyright .notice-text {
+      font-size: 0.88rem;
+      line-height: 1.75;
+      color: #b8cfe8;
+    }
+    .section-copyright .notice-text strong { color: var(--text-primary); font-weight: 600; }
 
     .steps-list { display: flex; flex-direction: column; gap: 2px; }
     .step-card {
@@ -149,7 +210,6 @@
       color: var(--accent); margin-bottom: 0.4rem;
     }
     .module-title { font-family: var(--font-display); font-size: 1.15rem; font-weight: 700; color: var(--white); margin-bottom: 0.4rem; }
-    .module-desc { color: var(--text-muted); font-size: 0.82rem; line-height: 1.6; }
 
     .weekly-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 2px; }
 
@@ -202,13 +262,21 @@
 
       <div style="margin-top:2.5rem;">
         <div class="module-label" style="margin-bottom:0.6rem;">Reference</div>
-        <div class="step-title">Video Reference/Comparison</div>
+        <div class="step-title" style="font-family:var(--font-display);font-size:1.35rem;font-weight:700;color:var(--white);margin-bottom:0.75rem;">Video Reference / Comparison</div>
         <div class="video-wrap">
           <iframe src="https://www.youtube.com/embed/OocOr1ULHfk" title="Video Reference/Comparison" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
-        <p class="video-credit">
-          <strong>Disclaimer:</strong> This reference clip is source footage used solely for educational comparison against the rotoscoped animation above. All rights to the original footage remain with its respective copyright owner(s); it is not claimed as original work and is included here under fair use for academic, non-commercial purposes.
-        </p>
+
+        <!-- DISCLAIMER NOTICE — visible gold box -->
+        <div class="copyright-notice">
+          <div class="notice-icon">⚠️</div>
+          <div class="notice-body">
+            <div class="notice-label">Disclaimer — Reference Footage</div>
+            <p class="notice-text">
+              <strong>This reference clip is source footage used solely for educational comparison</strong> against the rotoscoped animation above. All rights to the original footage remain with its respective copyright owner(s). It is not claimed as original work and is included here under fair use for <strong>academic, non-commercial purposes only</strong>.
+            </p>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -219,14 +287,20 @@
         <h2 class="section-title">Source Material</h2>
         <div class="divider"></div>
         <p class="section-desc">The original source footage and reference material used as the foundation for the rotoscoping process.</p>
-        <p class="video-credit" style="margin-top:1rem;">
-          <strong>Copyright notice:</strong> Any third-party video referenced or embedded in this section is the property of its original creator(s) and is used strictly for educational demonstration as part of an academic multimedia project. No ownership over this source footage is claimed by this website or its author.
-        </p>
+
+        <!-- COPYRIGHT NOTICE — visible blue box -->
+        <div class="section-copyright">
+          <div class="notice-icon">🛡️</div>
+          <div class="notice-body">
+            <div class="notice-label">Copyright Notice</div>
+            <p class="notice-text">
+              Any third-party video referenced or embedded in this section is the <strong>property of its original creator(s)</strong> and is used strictly for educational demonstration as part of an academic multimedia project. <strong>No ownership over this source footage is claimed</strong> by this website or its author. All rights belong to their respective owners.
+            </p>
+          </div>
+        </div>
       </div>
 
       <div class="steps-list">
-
-        <!-- Step 1 -->
         <div class="step-card">
           <div class="step-number">01</div>
           <div class="step-body">
@@ -239,7 +313,6 @@
             </div>
           </div>
         </div>
-
       </div>
     </div>
 
@@ -254,136 +327,64 @@
 
       <div class="weekly-grid">
 
-        <!-- Week 1 -->
         <div class="module-card">
-          <div class="module-video">
-            <iframe src="https://www.youtube.com/embed/SnZH8jGDYr8" title="Week 1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-          </div>
-          <div class="module-info">
-            <div class="module-label">Week 01</div>
-            <div class="module-title">Clip 0-5 seconds; Setup</div>
-          </div>
+          <div class="module-video"><iframe src="https://www.youtube.com/embed/SnZH8jGDYr8" title="Week 1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+          <div class="module-info"><div class="module-label">Week 01</div><div class="module-title">Clip 0-5 seconds; Setup</div></div>
         </div>
 
-        <!-- Week 2 -->
         <div class="module-card">
-          <div class="module-video">
-            <iframe src="https://www.youtube.com/embed/fmiqAZasffo" title="Week 2" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-          </div>
-          <div class="module-info">
-            <div class="module-label">Week 02</div>
-            <div class="module-title">Clip 5-10 seconds</div>
-          </div>
+          <div class="module-video"><iframe src="https://www.youtube.com/embed/fmiqAZasffo" title="Week 2" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+          <div class="module-info"><div class="module-label">Week 02</div><div class="module-title">Clip 5-10 seconds</div></div>
         </div>
 
-        <!-- Week 3 -->
         <div class="module-card">
-          <div class="module-video">
-            <iframe src="https://www.youtube.com/embed/Ia7bCdKv5GE" title="Week 3" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-          </div>
-          <div class="module-info">
-            <div class="module-label">Week 03</div>
-            <div class="module-title">Clip 10-15 seconds</div>
-          </div>
+          <div class="module-video"><iframe src="https://www.youtube.com/embed/Ia7bCdKv5GE" title="Week 3" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+          <div class="module-info"><div class="module-label">Week 03</div><div class="module-title">Clip 10-15 seconds</div></div>
         </div>
 
-        <!-- Week 4 -->
         <div class="module-card">
-          <div class="module-video">
-            <iframe src="https://www.youtube.com/embed/yLJomH2qZxI" title="Week 4" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-          </div>
-          <div class="module-info">
-            <div class="module-label">Week 04</div>
-            <div class="module-title">Clip 15-20 seconds</div>
-          </div>
+          <div class="module-video"><iframe src="https://www.youtube.com/embed/yLJomH2qZxI" title="Week 4" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+          <div class="module-info"><div class="module-label">Week 04</div><div class="module-title">Clip 15-20 seconds</div></div>
         </div>
 
-        <!-- Week 5 -->
         <div class="module-card">
-          <div class="module-video">
-            <iframe src="https://www.youtube.com/embed/V_hPaEhbqLg" title="Week 5" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-          </div>
-          <div class="module-info">
-            <div class="module-label">Week 05</div>
-            <div class="module-title">Clip 20-25 seconds</div>
-          </div>
+          <div class="module-video"><iframe src="https://www.youtube.com/embed/V_hPaEhbqLg" title="Week 5" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+          <div class="module-info"><div class="module-label">Week 05</div><div class="module-title">Clip 20-25 seconds</div></div>
         </div>
 
-        <!-- Week 6 -->
         <div class="module-card">
-          <div class="module-video">
-            <iframe src="https://www.youtube.com/embed/g0W2mAVerr0" title="Week 6" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-          </div>
-          <div class="module-info">
-            <div class="module-label">Week 06</div>
-            <div class="module-title">Clip 25-30 seconds</div>
-          </div>
+          <div class="module-video"><iframe src="https://www.youtube.com/embed/g0W2mAVerr0" title="Week 6" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+          <div class="module-info"><div class="module-label">Week 06</div><div class="module-title">Clip 25-30 seconds</div></div>
         </div>
 
-        <!-- Week 7 -->
         <div class="module-card">
-          <div class="module-video">
-            <iframe src="https://www.youtube.com/embed/47IydllWvqA" title="Week 7" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-          </div>
-          <div class="module-info">
-            <div class="module-label">Week 07</div>
-            <div class="module-title">Clip 30-35 seconds</div>
-          </div>
+          <div class="module-video"><iframe src="https://www.youtube.com/embed/47IydllWvqA" title="Week 7" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+          <div class="module-info"><div class="module-label">Week 07</div><div class="module-title">Clip 30-35 seconds</div></div>
         </div>
 
-        <!-- Week 8 -->
         <div class="module-card">
-          <div class="module-video">
-            <iframe src="https://www.youtube.com/embed/xDRlOT9syz8" title="Week 8" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-          </div>
-          <div class="module-info">
-            <div class="module-label">Week 08</div>
-            <div class="module-title">Clip 35-40 seconds</div>
-          </div>
+          <div class="module-video"><iframe src="https://www.youtube.com/embed/xDRlOT9syz8" title="Week 8" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+          <div class="module-info"><div class="module-label">Week 08</div><div class="module-title">Clip 35-40 seconds</div></div>
         </div>
 
-        <!-- Week 9 -->
         <div class="module-card">
-          <div class="module-video">
-            <iframe src="https://www.youtube.com/embed/90D2RG8MeQs" title="Week 9" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-          </div>
-          <div class="module-info">
-            <div class="module-label">Week 09</div>
-            <div class="module-title">Clip 40-45 seconds</div>
-          </div>
+          <div class="module-video"><iframe src="https://www.youtube.com/embed/90D2RG8MeQs" title="Week 9" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+          <div class="module-info"><div class="module-label">Week 09</div><div class="module-title">Clip 40-45 seconds</div></div>
         </div>
 
-        <!-- Week 10 -->
         <div class="module-card">
-          <div class="module-video">
-            <iframe src="https://www.youtube.com/embed/0WzmWdhieLY" title="Week 10" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-          </div>
-          <div class="module-info">
-            <div class="module-label">Week 10</div>
-            <div class="module-title">Clip 45-50 seconds</div>
-          </div>
+          <div class="module-video"><iframe src="https://www.youtube.com/embed/0WzmWdhieLY" title="Week 10" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+          <div class="module-info"><div class="module-label">Week 10</div><div class="module-title">Clip 45-50 seconds</div></div>
         </div>
 
-        <!-- Week 11 -->
         <div class="module-card">
-          <div class="module-video">
-            <iframe src="https://www.youtube.com/embed/4fq-BUQdCEE" title="Week 11" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-          </div>
-          <div class="module-info">
-            <div class="module-label">Week 11</div>
-            <div class="module-title">Clip 50-55 seconds</div>
-          </div>
+          <div class="module-video"><iframe src="https://www.youtube.com/embed/4fq-BUQdCEE" title="Week 11" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+          <div class="module-info"><div class="module-label">Week 11</div><div class="module-title">Clip 50-55 seconds</div></div>
         </div>
 
-        <!-- Week 12 -->
         <div class="module-card">
-          <div class="module-video">
-            <iframe src="https://www.youtube.com/embed/I5zfNFbhFjQ" title="Week 12" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-          </div>
-          <div class="module-info">
-            <div class="module-label">Week 12</div>
-            <div class="module-title">Clip 55-60 seconds</div>
-          </div>
+          <div class="module-video"><iframe src="https://www.youtube.com/embed/I5zfNFbhFjQ" title="Week 12" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
+          <div class="module-info"><div class="module-label">Week 12</div><div class="module-title">Clip 55-60 seconds</div></div>
         </div>
 
       </div>
@@ -400,6 +401,5 @@
     </div>
   </footer>
 
-  <script src="robot-bg.js" defer></script>
 </body>
 </html>

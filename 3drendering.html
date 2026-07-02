@@ -186,6 +186,7 @@
     .module-info { padding: 1rem 1.25rem; }
     .module-label { font-family: var(--font-mono); font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.35rem; }
     .module-title { font-family: var(--font-display); font-size: 1.15rem; font-weight: 700; color: var(--white); }
+    .module-desc { font-family: var(--font-body); font-size: 0.84rem; color: var(--text-secondary); line-height: 1.65; margin-top: 0.5rem; }
 
     /* FOOTER */
     footer { background: var(--navy-deep); border-top: 1px solid var(--navy-border); padding: 2.5rem 3rem; text-align: center; }
@@ -501,17 +502,17 @@
       const weeklyGrid = document.getElementById('weeklyGrid');
       
       const renderClips = [
-        { name: "Sun", id: "MB7T83NUnDk" },
-        { name: "Mercury", id: "bo6IpE0ZnqI" },
-        { name: "Venus", id: "Nshs_ytCvW8" },
-        { name: "Earth", id: "4iAIqWn1N0E" },
-        { name: "Moon", id: "V3CxcKEYHfA" },
-        { name: "Mars", id: "E-P3RErR1Fo" },
-        { name: "Jupiter", id: "LmOEyhSydws" },
-        { name: "Saturn", id: "y58nY6Jxscc" },
-        { name: "Uranus", id: "SJlEFHZE4uk" },
-        { name: "Neptune", id: "Fu1P-BTLf7w" },
-        { name: "Pluto", id: "UIg1MJWY4jg" }
+        { name: "Sun", id: "MB7T83NUnDk", desc: "The star at the heart of our solar system, a blazing sphere of hydrogen and helium whose gravity binds every planet in orbit." },
+        { name: "Mercury", id: "bo6IpE0ZnqI", desc: "The smallest and closest planet to the Sun, a cratered, airless world with the most extreme temperature swings of any planet." },
+        { name: "Venus", id: "Nshs_ytCvW8", desc: "The hottest planet in the solar system, wrapped in thick toxic clouds that trap heat in a runaway greenhouse effect." },
+        { name: "Earth", id: "4iAIqWn1N0E", desc: "Our home world and the only known planet with liquid water, a breathable atmosphere, and life." },
+        { name: "Moon", id: "V3CxcKEYHfA", desc: "Earth's only natural satellite, a rocky, cratered body whose gravity drives our ocean tides and stabilizes our planet's tilt." },
+        { name: "Mars", id: "E-P3RErR1Fo", desc: "Known as the Red Planet for its rusty, iron-rich soil, home to the tallest volcano and deepest canyon in the solar system." },
+        { name: "Jupiter", id: "LmOEyhSydws", desc: "The largest planet in the solar system, a swirling gas giant famous for its Great Red Spot and dozens of moons." },
+        { name: "Saturn", id: "y58nY6Jxscc", desc: "A majestic gas giant best known for its dazzling rings of ice and rock encircling its pale, banded atmosphere." },
+        { name: "Uranus", id: "SJlEFHZE4uk", desc: "An ice giant tipped on its side, rotating almost horizontally as it orbits the Sun, giving it extreme seasons." },
+        { name: "Neptune", id: "Fu1P-BTLf7w", desc: "The most distant planet from the Sun, a deep blue ice giant swept by the fastest winds ever recorded." },
+        { name: "Pluto", id: "UIg1MJWY4jg", desc: "A small, icy dwarf planet in the distant Kuiper Belt, once classified as the ninth planet of our solar system." }
       ];
 
       renderClips.forEach((clip, i) => {
@@ -528,6 +529,7 @@
             <div class="module-info">
               <div class="module-label">Render ${String(i+1).padStart(2,'0')}</div>
               <div class="module-title">${clip.name}</div>
+              <div class="module-desc">${clip.desc}</div>
             </div>
           </div>`;
       });

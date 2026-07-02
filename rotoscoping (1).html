@@ -104,6 +104,13 @@
     }
     .video-wrap iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
 
+    .video-credit {
+      font-family: var(--font-mono); font-size: 0.68rem; letter-spacing: 0.03em;
+      color: var(--text-muted); line-height: 1.7; margin-top: 0.85rem;
+      border-left: 2px solid var(--accent-line); padding-left: 0.85rem;
+    }
+    .video-credit strong { color: var(--text-secondary); font-weight: 500; }
+
     .steps-list { display: flex; flex-direction: column; gap: 2px; }
     .step-card {
       background: var(--navy-card);
@@ -199,6 +206,9 @@
         <div class="video-wrap">
           <iframe src="https://www.youtube.com/embed/OocOr1ULHfk" title="Video Reference/Comparison" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
+        <p class="video-credit">
+          <strong>Disclaimer:</strong> This reference clip is source footage used solely for educational comparison against the rotoscoped animation above. All rights to the original footage remain with its respective copyright owner(s); it is not claimed as original work and is included here under fair use for academic, non-commercial purposes.
+        </p>
       </div>
     </div>
 
@@ -209,6 +219,9 @@
         <h2 class="section-title">Source Material</h2>
         <div class="divider"></div>
         <p class="section-desc">The original source footage and reference material used as the foundation for the rotoscoping process.</p>
+        <p class="video-credit" style="margin-top:1rem;">
+          <strong>Copyright notice:</strong> Any third-party video referenced or embedded in this section is the property of its original creator(s) and is used strictly for educational demonstration as part of an academic multimedia project. No ownership over this source footage is claimed by this website or its author.
+        </p>
       </div>
 
       <div class="steps-list">
